@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mohammed Waled Gaming - عالم الألعاب يبدأ هنا">
+<title>Mohammed Waled Gaming</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ font-family:Arial,Tahoma,sans-serif;
+ background:#070b16;
+ color:white;
+}
+header{
+ padding:18px 6%;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ background:#0b1020;
+ border-bottom:1px solid #26324a;
+ position:sticky;
+ top:0;
+ z-index:10;
+}
+.logo{font-size:20px;font-weight:bold}
+.logo span{color:#8b5cf6}
+nav{display:flex;gap:20px}
+nav a{color:#cbd5e1;text-decoration:none}
+nav a:hover{color:white}
+.btn{
+ background:#6366f1;
+ color:white;
+ padding:12px 20px;
+ border-radius:12px;
+ text-decoration:none;
+ font-weight:bold;
+}
+.hero{
+ min-height:600px;
+ padding:80px 7%;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:40px;
+ background:radial-gradient(circle at 75% 40%,#6d28d944,transparent 35%);
+}
+.hero-text{max-width:650px}
+.tag{color:#a78bfa;font-weight:bold}
+h1{
+ font-size:clamp(45px,7vw,80px);
+ line-height:1.05;
+ margin:15px 0;
+}
+h1 span{color:#8b5cf6}
+.hero p{
+ color:#aab4c7;
+ font-size:19px;
+ line-height:1.8;
+}
+.buttons{display:flex;gap:12px;margin-top:25px;flex-wrap:wrap}
+.secondary{
+ border:1px solid #475569;
+ padding:12px 20px;
+ border-radius:12px;
+ color:white;
+ text-decoration:none;
+}
+.game-logo{
+ width:330px;
+ height:330px;
+ border-radius:35px;
+ background:linear-gradient(135deg,#171d38,#111827);
+ border:1px solid #394866;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:120px;
+ box-shadow:0 20px 70px #0008;
+}
+section{padding:70px 7%}
+.section-title{text-align:center;margin-bottom:35px}
+.section-title small{color:#a78bfa;font-weight:bold}
+.section-title h2{font-size:38px;margin:5px}
+.games{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:20px;
+}
+.card{
+ background:#101827;
+ border:1px solid #26344c;
+ border-radius:20px;
+ padding:18px;
+}
+.card:hover{border-color:#7c3aed}
+.cover{
+ height:150px;
+ border-radius:15px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:65px;
+ background:linear-gradient(135deg,#312e81,#172033);
+}
+.card h3{font-size:21px}
+.card p{color:#94a3b8}
+.card button{
+ width:100%;
+ border:0;
+ padding:11px;
+ border-radius:10px;
+ background:#4f46e5;
+ color:white;
+ font-weight:bold;
+}
+.categories{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:18px;
+}
+.category{
+ background:#101827;
+ border:1px solid #26344c;
+ border-radius:18px;
+ padding:25px;
+ text-align:center;
+ font-size:45px;
+}
+.category b{display:block;font-size:20px}
+.category small{color:#94a3b8}
+.about{
+ text-align:center;
+ background:#101827;
+}
+.about p{color:#94a3b8}
+footer{
+ text-align:center;
+ padding:25px;
+ color:#64748b;
+}
+@media(max-width:900px){
+ nav{display:none}
+ .hero{flex-direction:column;text-align:center}
+ .game-logo{width:260px;height:260px}
+ .games,.categories{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:550px){
+ .games,.categories{grid-template-columns:1fr}
+ .hero{padding:55px 5%}
+ section{padding:55px 5%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">🎮 Mohammed <span>Waled Gaming</span></div>
+
+<nav>
+<a href="#home">الرئيسية</a>
+<a href="#games">الألعاب</a>
+<a href="#categories">التصنيفات</a>
+<a href="#about">عن الموقع</a>
+</nav>
+
+<a class="btn" href="#games">العب الآن</a>
+</header>
+
+<section class="hero" id="home">
+<div class="hero-text">
+<div class="tag">🔥 أهلاً بك في عالم الألعاب</div>
+
+<h1>
+عالم الألعاب<br>
+<span>يبدأ هنا.</span>
+</h1>
+
+<p>
+اكتشف ألعابًا ممتعة وتصفح التصنيفات
+واختر لعبتك المفضلة من مكان واحد.
+</p>
+
+<div class="buttons">
+<a class="btn" href="#games">🎮 ابدأ اللعب</a>
+<a class="secondary" href="#categories">استكشف التصنيفات</a>
+</div>
+</div>
+
+<div class="game-logo">🎮</div>
+</section>
+
+<section id="games">
+
+<div class="section-title">
+<small>مختارات اليوم</small>
+<h2>🎮 ألعاب مميزة</h2>
+</div>
+
+<div class="games">
+
+<div class="card">
+<div class="cover">🏎️</div>
+<h3>سباق السيارات</h3>
+<p>اختبر سرعتك وحاول أن تكون الأول.</p>
+<button onclick="alert('اللعبة ستكون متاحة قريبًا 🎮')">العب الآن</button>
+</div>
+
+<div class="card">
+<div class="cover">⚽</div>
+<h3>كرة القدم</h3>
+<p>مباراة مليئة بالحماس والأهداف.</p>
+<button onclick="alert('اللعبة ستكون متاحة قريبًا 🎮')">العب الآن</button>
+</div>
+
+<div class="card">
+<div class="cover">🧩</div>
+<h3>لغز الذكاء</h3>
+<p>حل التحديات واختبر قوة تفكيرك.</p>
+<button onclick="alert('اللعبة ستكون متاحة قريبًا 🎮')">العب الآن</button>
+</div>
+
+<div class="card">
+<div class="cover">🗺️</div>
+<h3>المغامرة</h3>
+<p>ابدأ رحلة واكتشف تحديات جديدة.</p>
+<button onclick="alert('اللعبة ستكون متاحة قريبًا 🎮')">العب الآن</button>
+</div>
+
+</div>
+</section>
+
+<section id="categories">
+
+<div class="section-title">
+<small>اختار ما تحب</small>
+<h2>التصنيفات</h2>
+</div>
+
+<div class="categories">
+
+<div class="category">🏎️<b>سباقات</b><small>سرعة وتحدي</small></div>
+<div class="category">⚽<b>رياضة</b><small>منافسة وحماس</small></div>
+<div class="category">🧩<b>ألغاز</b><small>ذكاء وتركيز</small></div>
+<div class="category">🗺️<b>مغامرات</b><small>اكتشاف وتحديات</small></div>
+
+</div>
+</section>
+
+<section class="about" id="about">
+<h2>Mohammed Waled Gaming 🎮</h2>
+<p>مكان واحد لعالم الألعاب.</p>
+<p>الموقع في نسخته الأولى، وسيتم تطويره وإضافة ألعاب حقيقية إليه.</p>
+<a class="btn" href="#games">شاهد الألعاب</a>
+</section>
+
+<footer>
+© 2026 Mohammed Waled Gaming
+</footer>
+
+</body>
+  </html>
