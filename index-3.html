@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mohammed Waled Gaming - بنك أسئلة واختبار إلكتروني مع لوحة صدارة">
+<title>Mohammed Waled Gaming | بنك الأسئلة</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#070b16;color:#fff;line-height:1.8}.container{width:min(1050px,94%);margin:auto}header{padding:28px 0;text-align:center;background:linear-gradient(135deg,#111a35,#071020);border-bottom:1px solid #26345b}h1{margin:0;font-size:30px}.subtitle{color:#aeb9d5;margin:5px 0 0}.card{background:#10182a;border:1px solid #26345b;border-radius:18px;padding:20px;margin:20px 0;box-shadow:0 8px 30px #0004}input[type=text],textarea{width:100%;padding:13px;border-radius:12px;border:1px solid #35446d;background:#0b1220;color:#fff;font-size:16px;outline:none}textarea{min-height:100px;resize:vertical}label{display:block;margin:10px 0;padding:12px;border-radius:12px;background:#0b1220;border:1px solid #26345b;cursor:pointer}label:hover{border-color:#5b7cff}input[type=radio]{margin-left:8px}button{border:0;border-radius:12px;padding:13px 20px;font-size:16px;font-weight:bold;cursor:pointer}.primary{background:#2f6df6;color:#fff}.secondary{background:#26345b;color:#fff}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.q-title{font-size:18px;font-weight:bold;margin-bottom:10px}.badge{display:inline-block;background:#1d2b50;color:#b9c7ff;padding:4px 10px;border-radius:20px;font-size:13px;margin-bottom:10px}.result{font-size:28px;font-weight:bold;text-align:center}.good{color:#62e6a8}.warn{color:#ffd166}.hidden{display:none}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:11px;border-bottom:1px solid #26345b;text-align:right}th{color:#9fb2e9}.rank{font-weight:bold}.small{font-size:13px;color:#91a0bd}.notice{background:#171f34;border-right:4px solid #2f6df6;padding:12px;border-radius:10px}@media(max-width:600px){h1{font-size:24px}.card{padding:15px}.result{font-size:24px}}
+</style>
+</head>
+<body>
+<header><div class="container"><h1>Mohammed Waled Gaming</h1><div class="subtitle">بنك الأسئلة الأصعب — 20 سؤالًا + لوحة الصدارة</div></div></header>
+<main class="container">
+<section class="card"><div class="notice">اكتب اسمك أولًا. الاختبار يتكون من 10 اختيار من متعدد + 5 دلل + 5 ما النتائج المترتبة على.</div><br><label for="studentName">اسم الطالب</label><input id="studentName" type="text" maxlength="40" placeholder="اكتب اسمك هنا"></section>
+<form id="quizForm">
+<section class="card"><h2>أولًا: اختر الإجابة الصحيحة (10 أسئلة)</h2><div id="mcq"></div></section>
+<section class="card"><h2>ثانيًا: دلل (5 أسئلة)</h2><div id="prove"></div></section>
+<section class="card"><h2>ثالثًا: ما النتائج المترتبة على؟ (5 أسئلة)</h2><div id="results"></div><div class="actions"><button type="button" class="primary" onclick="submitQuiz()">تسليم الاختبار</button><button type="button" class="secondary" onclick="resetQuiz()">مسح الإجابات</button></div></section>
+</form>
+<section id="scoreCard" class="card hidden"><h2>النتيجة</h2><div id="scoreText" class="result"></div><p id="scoreNote" class="small" style="text-align:center"></p></section>
+<section class="card"><h2>🏆 لوحة الصدارة</h2><p class="small">تُعرض النتائج المحفوظة على هذا الجهاز. لعمل لوحة صدارة مشتركة فعلية بين جميع الزوار، ضع بيانات Supabase في أسفل الملف.</p><div id="leaderboard">لا توجد نتائج حتى الآن.</div></section>
+</main>
+<script>
+const SUPABASE_URL="https://kywsfikxrduurhpkrouv.supabase.co";
+const SUPABASE_ANON_KEY="ضع_هنا_مفتاح_anon_public_الخاص_بك";
+const mcq=[
+{q:"أي عبارة تعبّر بدقة عن العلاقة بين السبب والنتيجة في الظاهرة المدروسة؟",o:["النتيجة تحدث دائمًا بلا سبب","السبب قد يؤدي إلى نتيجة تبعًا للظروف","لا توجد علاقة بينهما","النتيجة تسبق السبب دائمًا"],a:1},
+{q:"عند مقارنة حالتين متشابهتين مع اختلاف عامل واحد فقط، فإن الهدف الأساسي هو تحديد:",o:["العامل المؤثر","عدد الأشخاص","المكان فقط","الزمن فقط"],a:0},
+{q:"أي اختيار يمثل استنتاجًا مبنيًا على دليل وليس مجرد رأي؟",o:["أظن أن الأمر صحيح","ربما يكون السبب كذا","البيانات تشير إلى وجود علاقة","الجميع يعتقد ذلك"],a:2},
+{q:"إذا زاد عامل مؤثر ثم ظهرت زيادة مرتبطة في النتيجة، فما أفضل وصف للعلاقة؟",o:["علاقة محتملة تحتاج دليلًا","استحالة وجود علاقة","لا يمكن تسجيل الملاحظة","تناقض مؤكد"],a:0},
+{q:"ما الخطوة الأفضل للتحقق من صحة تفسير لظاهرة؟",o:["تجاهل الأدلة المخالفة","جمع أدلة ومقارنتها","اختيار الإجابة الأطول","تغيير السؤال"],a:1},
+{q:"أي مما يلي يجعل الاستنتاج أكثر قوة؟",o:["الاعتماد على مثال واحد","تكرار الملاحظة ووجود أدلة متسقة","الاعتماد على التخمين","حذف النتائج غير المناسبة"],a:1},
+{q:"إذا اختلفت النتائج عن التوقع، فما التصرف الأفضل؟",o:["تغيير النتائج","رفض التجربة فورًا","مراجعة الفرضية والبيانات","إخفاء النتيجة"],a:2},
+{q:"عند وجود عاملين يمكن أن يفسرا النتيجة نفسها، ما الأفضل؟",o:["اختبار أثر كل عامل بصورة منفصلة","اختيار أحدهما عشوائيًا","عدم جمع أي بيانات","اعتبارهما متطابقين"],a:0},
+{q:"ما الذي يميز التفسير القوي عن التفسير الضعيف؟",o:["أنه أكثر طولًا","أنه يعتمد على أدلة قابلة للفحص","أنه أصعب في الفهم","أنه لا يقبل المناقشة"],a:1},
+{q:"إذا تكررت النتيجة في ظروف متشابهة، فهذا يزيد من:",o:["قوة الدليل","غموض السؤال","عدد الفرضيات بلا سبب","احتمال الخطأ حتمًا"],a:0}
+];
+const prove=[
+{q:"دلل على أهمية الاعتماد على الأدلة عند إصدار الحكم.",k:["دليل","أدلة","بيانات","معلومات"]},
+{q:"دلل على أن مقارنة الحالات تساعد في الوصول إلى تفسير أدق.",k:["مقارنة","حالات","اختلاف","عامل"]},
+{q:"دلل على أهمية مراجعة الفرضية إذا لم توافق النتائج التوقع.",k:["مراجعة","فرضية","نتائج","توقع"]},
+{q:"دلل على أن تكرار الملاحظة يقوي الاستنتاج.",k:["تكرار","ملاحظة","استنتاج","نتيجة"]},
+{q:"دلل على أن وجود علاقة بين عاملين لا يكفي وحده لإثبات السبب والنتيجة.",k:["علاقة","سبب","نتيجة","دليل"]}
+];
+const consequences=[
+{q:"ما النتائج المترتبة على تجاهل الأدلة عند تفسير الظواهر؟",k:["خطأ","استنتاج","تفسير","غير دقيق"]},
+{q:"ما النتائج المترتبة على تغيير أكثر من عامل في الوقت نفسه عند المقارنة؟",k:["صعوبة","تحديد","عامل","سبب"]},
+{q:"ما النتائج المترتبة على تكرار التجربة أو الملاحظة في ظروف متشابهة؟",k:["زيادة","ثقة","قوة","دقة"]},
+{q:"ما النتائج المترتبة على ظهور نتائج مخالفة للتوقعات؟",k:["مراجعة","فرضية","تفسير","دليل"]},
+{q:"ما النتائج المترتبة على وجود أدلة متسقة من أكثر من مصدر؟",k:["قوة","استنتاج","ثقة","دليل"]}
+];
+function render(){let b=document.getElementById("mcq");mcq.forEach((x,i)=>{b.innerHTML+=`<div class="card"><span class="badge">سؤال ${i+1} — 1 درجة</span><div class="q-title">${x.q}</div>`+x.o.map((op,j)=>`<label><input type="radio" name="mcq${i}" value="${j}"> ${op}</label>`).join("")+`</div>`});let p=document.getElementById("prove");prove.forEach((x,i)=>{p.innerHTML+=`<div class="card"><span class="badge">سؤال ${i+11} — 1 درجة</span><div class="q-title">${x.q}</div><textarea id="prove${i}" placeholder="اكتب الإجابة هنا..."></textarea></div>`});let r=document.getElementById("results");consequences.forEach((x,i)=>{r.innerHTML+=`<div class="card"><span class="badge">سؤال ${i+16} — 1 درجة</span><div class="q-title">${x.q}</div><textarea id="result${i}" placeholder="اكتب الإجابة هنا..."></textarea></div>`})}
+function keywordScore(text,keys){text=(text||"").toLowerCase().replace(/[ًٌٍَُِّْـ]/g,"");let hits=0;keys.forEach(k=>{if(text.includes(k.toLowerCase()))hits++});return hits>=2?1:0}
+async function submitQuiz(){const name=document.getElementById("studentName").value.trim();if(!name){alert("اكتب اسمك أولًا.");return}let score=0;mcq.forEach((x,i)=>{const c=document.querySelector(`input[name="mcq${i}"]:checked`);if(c&&Number(c.value)===x.a)score++});prove.forEach((x,i)=>score+=keywordScore(document.getElementById("prove"+i).value,x.k));consequences.forEach((x,i)=>score+=keywordScore(document.getElementById("result"+i).value,x.k));const row={name,score,total:20,created_at:new Date().toISOString()};localStorage.setItem("lastQuiz",JSON.stringify(row));saveLocal(row);await saveSupabase(row);document.getElementById("scoreCard").classList.remove("hidden");document.getElementById("scoreText").textContent=`${score} / 20`;document.getElementById("scoreText").className="result "+(score>=15?"good":score>=10?"warn":"");document.getElementById("scoreNote").textContent=score===20?"ممتاز!":score>=15?"أداء قوي!":"راجع إجاباتك وحاول مرة أخرى.";renderLeaderboard();document.getElementById("scoreCard").scrollIntoView({behavior:"smooth"})}
+function saveLocal(row){let arr=JSON.parse(localStorage.getItem("leaderboard")||"[]");arr.push(row);arr.sort((a,b)=>b.score-a.score||new Date(a.created_at)-new Date(b.created_at));localStorage.setItem("leaderboard",JSON.stringify(arr.slice(0,100)))}
+async function saveSupabase(row){if(!SUPABASE_ANON_KEY||SUPABASE_ANON_KEY.includes("ضع_هنا"))return;try{await fetch(SUPABASE_URL+"/rest/v1/leaderboard",{method:"POST",headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(row)})}catch(e){}}
+async function renderLeaderboard(){let arr=JSON.parse(localStorage.getItem("leaderboard")||"[]");if(SUPABASE_ANON_KEY&&!SUPABASE_ANON_KEY.includes("ضع_هنا")){try{const res=await fetch(SUPABASE_URL+"/rest/v1/leaderboard?select=name,score,total,created_at&order=score.desc,created_at.asc&limit=20",{headers:{"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY}});if(res.ok)arr=await res.json()}catch(e){}}if(!arr.length){document.getElementById("leaderboard").textContent="لا توجد نتائج حتى الآن.";return}document.getElementById("leaderboard").innerHTML=`<table><thead><tr><th>#</th><th>الاسم</th><th>الدرجة</th></tr></thead><tbody>`+arr.slice(0,20).map((x,i)=>`<tr><td class="rank">${i+1}</td><td>${escapeHtml(x.name)}</td><td>${x.score}/20</td></tr>`).join("")+`</tbody></table>`}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}function resetQuiz(){document.getElementById("quizForm").reset();document.getElementById("scoreCard").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"})}render();renderLeaderboard();
+</script>
+</body>
+</html>
